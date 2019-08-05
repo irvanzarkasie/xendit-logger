@@ -27,6 +27,7 @@ const logger = winston.createLogger({
 });
 
 app.post('/log', (req, res) => {
+  console.log(new Date().toISOString() + " " + req.method + " " + req.originalUrl + " invoked");
   var message = req.body.message;
   var id = (req.body.id) ? req.body.id : process.env.DEFAULT_ID;
   var payload = (req.body.payload) ? req.body.payload : process.env.DEFAULT_PAYLOAD;
@@ -47,5 +48,6 @@ app.post('/log', (req, res) => {
 });
 
 var server = app.listen(process.env.APP_PORT, function () {
-    console.log("Logger app running on port", server.address().port);
+  console.log(new Date().toISOString() + " " + process.env.APP_NAME + " running on server", server.address());
+  console.log(new Date().toISOString() + " " + process.env.APP_NAME + " running on port", server.address().port);
 });
